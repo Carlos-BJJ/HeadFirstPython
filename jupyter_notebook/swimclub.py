@@ -33,4 +33,5 @@ def read_swim_data(filename):
     # O formato :02d garante que números menores que 10 ganhem um zero à esquerda (ex: 05)
     media_formatada = f"{minutos}:{segundos:02d}.{centesimos:02d}"
 
+    #Comando de retorno de valores da função
     return nome, categoria, distancia, estilo, tempos, media_formatada
