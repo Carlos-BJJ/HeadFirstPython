@@ -1,1 +1,0 @@
-print("Estudando git stash")
