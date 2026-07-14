@@ -22,8 +22,8 @@ def read_swim_data(filename):
             minutos = 0
             segundos, centesimos = t.split(".")
 
-    int_conversao = ((int(minutos) * 60 * 100) + (int(segundos) * 100) + (int(centesimos)))
-    convercoes.append(int_conversao)
+        int_conversao = ((int(minutos) * 60 * 100) + (int(segundos) * 100) + (int(centesimos)))
+        convercoes.append(int_conversao)
 
     # 4. Calcula a média (mantendo em centésimos como inteiro)
     media_centesimos = round(statistics.mean(convercoes))
@@ -46,4 +46,4 @@ def read_swim_data(filename):
     media_formatada = f"{minutos}:{segundos:02d}.{centesimos:02d}"
 
     #Comando de retorno de valores da função
-    return nome, categoria, distancia, estilo, tempos, media_formatada
+    return nome, categoria, distancia, estilo, tempos, media_formatada, convercoes
