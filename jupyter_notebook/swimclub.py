@@ -4,6 +4,7 @@ import hfpy_utils
 CHARTS = "charts/"
 FOLDER = "swimdata/"
 
+"""Função para obter os dados (nome, categoria, distancia, estilo, tempos, media_formatada, convercoes), acessando os arquivos desejados no diretorio swimdata"""
 def read_swim_data(filename):
     # 1. Desestrutura o nome do arquivo
     nome, categoria, distancia, estilo = filename.removesuffix(".txt").split("-")
@@ -50,6 +51,7 @@ def read_swim_data(filename):
     #Comando de retorno de valores da função
     return nome, categoria, distancia, estilo, tempos, media_formatada, convercoes
 
+"""Função para criar o codigo em html para fazer a pagina web de grafico de barras de cada aluno, usando informações da função anterior"""
 def produce_bar_chart(fn):
     #Descompacto as variaveis que vou utilizar
     (swimmer, age, distance, stroke, times, average, converts) = read_swim_data(fn)
