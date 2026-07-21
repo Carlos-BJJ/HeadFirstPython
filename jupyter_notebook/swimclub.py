@@ -1,5 +1,7 @@
 import statistics
+import hfpy_utils
 
+CHARTS = "charts/"
 FOLDER = "swimdata/"
 
 def read_swim_data(filename):
@@ -47,3 +49,55 @@ def read_swim_data(filename):
 
     #Comando de retorno de valores da função
     return nome, categoria, distancia, estilo, tempos, media_formatada, convercoes
+
+def produce_bar_chart(fn):
+    #Descompacto as variaveis que vou utilizar
+    (swimmer, age, distance, stroke, times, average, converts) = read_swim_data(fn)
+
+    #Uso f'string, uma maneira mais eficiente de declarar variaveis em uma string
+    title = f"{swimmer} (Under {age}) {distance} {stroke}"
+
+    header = f"""<!DOCTYPE html>
+    <html>
+        <head>
+            <title>
+                {title}
+            </title>
+         </head>
+         <body>
+            <h3>{title}</h3>"""
+    
+    #Crio uma variavel para guardar o maior valor da lista de converções
+    from_max = max(converts)
+
+    #Crio uma variavel vazia que irá ser substituida pelo código em HTML
+    body = ""
+
+    #Uso o reverse para reverter a ordem dos tempos e das barras do grafico, assim como o projeto é descrito
+    times.reverse()
+    converts.reverse()
+
+    #Loop para utilizar a função do módulo "hfpy_utils" para a converção dos valores para o intervalo desejado (0 a 400)
+    for n,t in enumerate(times):
+        bar_windth = hfpy_utils.convert2range(converts[n], 0, from_max, 0, 350)
+        body = body + f"""
+                        <svg height="30" width="400">
+                            <rect height="30" width="{bar_windth}" style="fill:rgb(0,0,255);" />
+                        </svg> {t} <br />
+                    """
+    #Crio uma variavel para escrever o rodapé do código em HTML
+    footer = f"""
+            <p>Average time: {average}</p>
+        </body>
+    </html>
+    """
+    page = header + body + footer
+
+    save_to = f"charts/{fn.removesuffix(".txt")}.html"
+
+    #Uso BIF open para salvar a variavel page no arquivo com nome descrito pela variavel save_to
+    #o "w" significa o padrão de gravação de arquivos, e o "a"(não utilizado no momento) é de anexação
+    with open(save_to, "w") as sf:
+        print(page, file = sf)
+    
+    return save_to
