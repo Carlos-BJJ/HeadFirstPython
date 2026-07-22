@@ -1,1 +1,3 @@
 Testando a funcionalida de dar push e buscar branchs, usando minha branch secundaria (code_python) no notebook para buscar ela no pc
+
+Agora irei modificar a branch pelo pc, e depois buscarei a branch pelo notebook
