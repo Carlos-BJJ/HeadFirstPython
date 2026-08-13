@@ -1,2 +1,3 @@
 charts/Abi-10-50m-Free.html
 charts/Abi-10-50m-Free.html
+Testando a mudança de diretorio de Desktop para documents
